@@ -12,33 +12,15 @@ ListNode ForWardListToListNode(forward_list<int> list) {
 }
 
 int main() {
-    ListNode l1 = ForWardListToListNode({2, 4, 3});
-    ListNode l2 = ForWardListToListNode({5, 6, 4});
-    auto p1 = &l1;
-    auto p2 = &l2;
-    ListNode last(0);
-    auto *p = &last;
-    while (p1 || p2) {
-        int full = 0;
-        int sum = p1->val + p2->val;
-        if (sum > 9) {
-            full = 1;
-            sum = sum - 10;
-        }
-
-        p = new ListNode(sum);
-        cout << p << endl;
-        if (!p1->next && !p2->next) break;
-        if (!p1->next) p1->next = new ListNode(0);
-        p1 = p1->next;
-        if (full) p1->val++;
-        if (!p2->next) p2->next = new ListNode(0);
-        p2 = p2->next;
-        p = p->next;
-    }
-
-    cout << last.val << endl;
-    cout << last.next->val << endl;
-    cout << last.next->next->val << endl;
+    // TEST 1
+//    ListNode l1 = ForWardListToListNode({2, 4, 3});
+//    ListNode l2 = ForWardListToListNode({5, 6, 4});
+    // TEST 2
+    ListNode l1 = ForWardListToListNode({5});
+    ListNode l2 = ForWardListToListNode({5});
+    ListNode *l = Solution().addTwoNumbers(&l1, &l2);
+    cout << l->val << endl;
+    cout << l->next->val << endl;
+//        cout << l->next->next->val << endl;
     return 0;
 }
