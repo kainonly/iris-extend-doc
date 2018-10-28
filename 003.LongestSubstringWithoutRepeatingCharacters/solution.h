@@ -10,17 +10,17 @@ class Solution {
 public:
     int lengthOfLongestSubstring(const string &s) {
         int size = s.size();
-        int max = 0, length = 0;
-        bool repeat = false;
-        for (int i = 0; i < size; i++) {
+        if (size == 1) return 1;
+        int max = 0, length = 0, alone = 0;
+        for (int i = 0; i < size - 1; i++) {
             auto search = s.find_first_of(s[i], i + 1);
             if (search != string::npos) {
                 length = search - i;
-                repeat = true;
-            }
-            if (length > max)max = length;
+                alone = 0;
+            } else alone = size - i;
+            if (length > max) max = length;
         }
-        if (!repeat) max = size;
+        if (alone && alone > max) max = alone;
         return max;
     }
 };
