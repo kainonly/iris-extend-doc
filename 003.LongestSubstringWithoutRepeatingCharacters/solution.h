@@ -1,8 +1,17 @@
 #ifndef LEETCODE_MAIN_H
 #define LEETCODE_MAIN_H
 
-class Solution {
+#include <iostream>
+#include <string>
 
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(const string &s) {
+        cout << s << endl;
+        return 0;
+    }
 };
 
 
