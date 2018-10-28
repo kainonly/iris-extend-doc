@@ -1,6 +1,7 @@
 #include "solution.h"
 
 int main() {
-    Solution().lengthOfLongestSubstring("assdqwe");
+    int length = Solution().lengthOfLongestSubstring("au");
+    cout << length << endl;
     return 0;
 };
