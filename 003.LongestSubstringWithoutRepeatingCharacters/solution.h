@@ -15,11 +15,13 @@ public:
         unordered_map<int, int> cons;
         for (int i = 0; i < size - 1; i++) {
             auto search = s.find_first_of(s[i], i + 1);
+            int prev = cons[i - 1];
             if (search != string::npos) {
-                int prev = cons[i - 1];
                 if (prev >= search) cons[i - 1] = search - 1;
                 else cons.insert({i, search - 1});
-            } else cons.insert({i, size - 1});
+            } else {
+                cons.insert({i, size - 1});
+            }
         }
         int max = 0;
         int len = cons.size();
