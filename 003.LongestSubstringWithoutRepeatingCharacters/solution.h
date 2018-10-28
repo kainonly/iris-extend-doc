@@ -16,7 +16,7 @@ public:
             auto search = s.find_first_of(s[i], i + 1);
             if (search != string::npos) {
                 length = search - i;
-                alone = 0;
+                alone = alone - length;
             } else alone = size - i;
             if (length > max) max = length;
         }
