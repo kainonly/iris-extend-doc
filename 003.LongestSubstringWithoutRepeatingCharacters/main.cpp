@@ -1,7 +1,13 @@
 #include "solution.h"
 
 int main() {
-    int length = Solution().lengthOfLongestSubstring("abcabcbb");
-    cout << length << endl;
+    cout << Solution().lengthOfLongestSubstring("abcabcbb") << endl;
+    cout << Solution().lengthOfLongestSubstring("abba") << endl;
+    cout << Solution().lengthOfLongestSubstring("au") << endl;
+    cout << Solution().lengthOfLongestSubstring("aab") << endl;
+    cout << Solution().lengthOfLongestSubstring("cdd") << endl;
+    cout << Solution().lengthOfLongestSubstring(" ") << endl;
+    cout << Solution().lengthOfLongestSubstring("pwwkew") << endl;
+    cout << Solution().lengthOfLongestSubstring("bbbbb") << endl;
     return 0;
 };
