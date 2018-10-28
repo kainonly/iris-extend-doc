@@ -17,7 +17,7 @@ public:
             auto search = s.find_first_of(s[i], i + 1);
             if (search != string::npos) {
                 int prev = cons[i - 1];
-                if (prev >= search) cons[i - 1] = i;
+                if (prev >= search) cons[i - 1] = search - 1;
                 else cons.insert({i, search - 1});
             } else cons.insert({i, size - 1});
         }

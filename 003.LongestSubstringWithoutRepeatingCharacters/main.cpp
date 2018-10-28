@@ -9,5 +9,6 @@ int main() {
     cout << Solution().lengthOfLongestSubstring(" ") << endl;
     cout << Solution().lengthOfLongestSubstring("pwwkew") << endl;
     cout << Solution().lengthOfLongestSubstring("bbbbb") << endl;
+    cout << Solution().lengthOfLongestSubstring("abcb") << endl;
     return 0;
 };
