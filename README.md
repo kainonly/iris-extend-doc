@@ -1,6 +1,6 @@
 # leetcode
 
-LeetCode training repository
+LeetCode Algorithmic practice repository
 
 | NO. | Title |C++ progress|Go progress|JavaScript progress|
 | --- | ----- | --- | --- | --- |
