@@ -10,3 +10,5 @@ add_executable(MedianOfTwoSortedArrays 004.MedianOfTwoSortedArrays/main.cpp 004.
 add_executable(LongestPalindromicSubstring 005.LongestPalindromicSubstring/main.cpp 005.LongestPalindromicSubstring/solution.h)
 add_executable(ZigzagConversion 006.ZigzagConversion/main.cpp 006.ZigzagConversion/solution.h)
 add_executable(ReverseInteger 007.ReverseInteger/solution.h 007.ReverseInteger/main.cpp)
+
+add_executable(PalindromeNumber 009.PalindromeNumber/solution.h 009.PalindromeNumber/main.cpp)
