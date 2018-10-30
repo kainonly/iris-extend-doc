@@ -10,4 +10,4 @@ LeetCode training repository
 |004|MedianOfTwoSortedArrays|-|
 |005|LongestPalindromicSubstring|-|
 |006|ZigzagConversion|-|
-|007|ReverseInteger|-|
+|007|ReverseInteger|complete|
