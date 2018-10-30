@@ -12,7 +12,9 @@ public:
         while (x != 0) {
             int last = x % 10;
             x = (x - last) / 10;
+            // MAX_VALUE : 2147483647
             if (result > INT_MAX / 10 || (result == INT_MAX / 10 && last > 7)) return 0;
+            // MIN_VALUE : -2147483648
             if (result < INT_MIN / 10 || (result == INT_MIN / 10 && last < -8)) return 0;
             result = result * 10 + last;
         }
