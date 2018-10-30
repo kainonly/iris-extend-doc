@@ -3,7 +3,7 @@
 LeetCode training repository
 
 | NO. | Title |C++ progress|Javascript progress|
-| --- | ----- | --- | --- | --- |
+| --- | ----- | --- | --- |
 | 001 | TwoSum | [x] | [] |
 | 002 | AddTwoNumber | [x] | [] |
 | 003 | LongestSubstringWithoutRepeatingCharacters | [] | [] |
