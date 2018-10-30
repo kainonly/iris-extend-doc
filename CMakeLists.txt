@@ -8,5 +8,5 @@ add_executable(AddTwoNumber 002.AddTwoNumber/main.cpp 002.AddTwoNumber/solution.
 add_executable(LongestSubstringWithoutRepeatingCharacters 003.LongestSubstringWithoutRepeatingCharacters/main.cpp 003.LongestSubstringWithoutRepeatingCharacters/solution.h)
 add_executable(MedianOfTwoSortedArrays 004.MedianOfTwoSortedArrays/main.cpp 004.MedianOfTwoSortedArrays/solution.h)
 add_executable(LongestPalindromicSubstring 005.LongestPalindromicSubstring/main.cpp 005.LongestPalindromicSubstring/solution.h)
-#add_executable(ZigzagConversion )
+add_executable(ZigzagConversion 006.ZigzagConversion/main.cpp 006.ZigzagConversion/solution.h)
 #add_executable(ReverseInteger )
