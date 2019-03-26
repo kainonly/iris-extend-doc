@@ -1,6 +1,6 @@
 <?php
 
-namespace laravel\bit\lifecycle;
+namespace lumen\bit\lifecycle;
 
 interface AddBeforeHooks
 {
