@@ -2,6 +2,7 @@
 
 namespace lumen\bit\traits;
 
+use Closure;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
  * @property array lists_default_validate
  * @property array lists_before_result
  * @property array lists_condition
+ * @property Closure lists_condition_group
  * @property string lists_order_columns
  * @property string lists_order_direct
  * @property array lists_columns
@@ -45,13 +47,19 @@ trait ListsModel
                 $this->post['where']
             );
 
-            $total = DB::table($this->model)->where($condition)->count();
-            $lists = DB::table($this->model)
+            $totalQuery = DB::table($this->model)->where($condition);
+            $total = empty($this->lists_condition_group) ?
+                $totalQuery->count() :
+                $totalQuery->where($this->lists_condition_group)->count();
+
+            $listsQuery = DB::table($this->model)
                 ->where($condition)
                 ->orderBy($this->lists_order_columns, $this->lists_order_direct)
                 ->take($this->post['page']['limit'])
-                ->skip($this->post['page']['index'] - 1)
-                ->get($this->lists_columns);
+                ->skip($this->post['page']['index'] - 1);
+            $lists = empty($this->lists_condition_group) ?
+                $listsQuery->get($this->lists_columns) :
+                $listsQuery->where($this->lists_condition_group)->get($this->lists_columns);
 
             return method_exists($this, '__listsCustomReturn') ? $this->__listsCustomReturn($lists, $total) : [
                 'error' => 0,

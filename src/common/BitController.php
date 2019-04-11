@@ -38,6 +38,7 @@ abstract class BitController extends BaseController
         'msg' => 'error:before_fail'
     ];
     protected $lists_condition = [];
+    protected $lists_condition_group = null;
     protected $lists_order_columns = 'create_time';
     protected $lists_order_direct = 'desc';
     protected $lists_columns = ['*'];
