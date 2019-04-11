@@ -54,6 +54,7 @@ abstract class BitController extends BaseController
         'msg' => 'error:before_fail'
     ];
     protected $get_condition = [];
+    protected $get_condition_group = null;
     protected $get_columns = ['*'];
 
     protected $add_validate = [];
