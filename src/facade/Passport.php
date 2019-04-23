@@ -26,14 +26,14 @@ class Passport extends Facade
             $ack = Tools::random();
             $token = (new Builder())
                 ->setId($jti)
-                ->setIssuer($config->issuer)
-                ->setAudience($config->audience)
+                ->setIssuer($config['issuer'])
+                ->setAudience($config['audience'])
                 ->set('ack', $ack)
                 ->set('user', $userId)
                 ->set('role', $roleId)
                 ->set('symbol', $symbol)
-                ->setExpiration(time() + $config->ttl)
-                ->sign($config->sha256, $config->secret)
+                ->setExpiration(time() + $config['ttl'])
+                ->sign($config['sha256'], $config['secret'])
                 ->getToken();
 
             $result = RefreshToken::factory($jti, $ack);
@@ -42,7 +42,7 @@ class Passport extends Facade
                 'msg' => 'error:factory_refresh_token_failed'
             ];
 
-            Cookie::queue($config->token_name, (string)$token, 0);
+            Cookie::queue($config['token_name'], (string)$token, 0);
             return [
                 'error' => 0,
                 'msg' => 'ok'
@@ -63,19 +63,19 @@ class Passport extends Facade
     {
         try {
             $config = Config::get('passport');
-            if (!Cookie::get($config->token_name)) return [
+            if (!Cookie::get($config['token_name'])) return [
                 'error' => 1,
                 'msg' => 'error:not_exists_token'
             ];
 
-            $token = (new Parser())->parse(Cookie::get($config->token_name));
-            if (!$token->verify($config->sha256, $config->secret)) return [
+            $token = (new Parser())->parse(Cookie::get($config['token_name']));
+            if (!$token->verify($config['sha256'], $config['secret'])) return [
                 'error' => 1,
                 'msg' => 'error:verify'
             ];
 
-            if ($token->getClaim('iss') != $config->issuer ||
-                $token->getClaim('aud') != $config->audience) return [
+            if ($token->getClaim('iss') != $config['issuer'] ||
+                $token->getClaim('aud') != $config['audience']) return [
                 'error' => 1,
                 'msg' => 'error:incorrect'
             ];
@@ -93,18 +93,18 @@ class Passport extends Facade
 
                 $newToken = (new Builder())
                     ->setId($token->getClaim('jti'))
-                    ->setIssuer($config->issuer)
-                    ->setAudience($config->audience)
+                    ->setIssuer($config['issuer'])
+                    ->setAudience($config['audience'])
                     ->set('ack', $token->getClaim('ack'))
                     ->set('user', $token->getClaim('user'))
                     ->set('role', $token->getClaim('role'))
                     ->set('symbol', $token->getClaim('symbol'))
-                    ->setExpiration(time() + $config->ttl)
-                    ->sign($config->sha256, $config->secret)
+                    ->setExpiration(time() + $config['ttl'])
+                    ->sign($config['sha256'], $config['secret'])
                     ->getToken();
 
                 $token = $newToken;
-                Cookie::queue($config->token_name, (string)$token, 0);
+                Cookie::queue($config['token_name'], (string)$token, 0);
             }
 
             return [
@@ -125,6 +125,6 @@ class Passport extends Facade
     public function tokenClear()
     {
         $config = Config::get('passport');
-        Cookie::queue(Cookie::forget($config->token_name));
+        Cookie::queue(Cookie::forget($config['token_name']));
     }
 }
