@@ -42,7 +42,7 @@ class Passport extends Facade
                 'msg' => 'error:factory_refresh_token_failed'
             ];
 
-            Cookie::queue($config['token_name'], (string)$token, 0);
+            Cookie::queue($config['token_name'], (string)$token, 21600, null, null, true, true);
             return [
                 'error' => 0,
                 'msg' => 'ok'
@@ -104,7 +104,7 @@ class Passport extends Facade
                     ->getToken();
 
                 $token = $newToken;
-                Cookie::queue($config['token_name'], (string)$token, 0);
+                Cookie::queue($config['token_name'], (string)$token, 21600, null, null, true, true);
             }
 
             return [
