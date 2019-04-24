@@ -25,7 +25,7 @@ class Curd extends Facade
             'prefix' => $name,
             'middleware' => $middleware
         ], function () use ($name, $routeLists) {
-            foreach ($routeLists as $uri => $action) Route::post($uri, Str::studly($name) . '@' . $action);
+            foreach ($routeLists as $uri) Route::post($uri, Str::studly($name) . '@' . $uri);
         });
     }
 
@@ -60,7 +60,7 @@ class Curd extends Facade
             if ($add) Route::post('add', Str::studly($name) . '@add');
             if ($edit) Route::post('edit', Str::studly($name) . '@edit');
             if ($delete) Route::post('delete', Str::studly($name) . '@delete');
-            foreach ($routeLists as $uri => $action) Route::post($uri, Str::studly($name) . '@' . $action);
+            foreach ($routeLists as $uri) Route::post($uri, Str::studly($name) . '@' . $uri);
         });
     }
 }
