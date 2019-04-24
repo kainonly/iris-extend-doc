@@ -16,10 +16,10 @@ class Curd extends Facade
     /**
      * Create Array Curd Route Controller
      * @param string $name Controller Name
-     * @param $middleware Middleware
+     * @param array $middleware Middleware
      * @param array $routeLists
      */
-    public static function lists($name, $middleware, $routeLists = [])
+    public static function lists($name, $middleware = [], $routeLists = [])
     {
         Route::group([
             'prefix' => $name,
