@@ -15,22 +15,34 @@ class Curd extends Facade
 {
     /**
      * Create Bit Curd Route Controller
-     * @param string $name Controller name
-     * @param array $traits traits name
-     * @param array $middleware
+     * @param string $name Controller Name
+     * @param array $middleware Middleware
+     * @param bool $get
+     * @param bool $originLists
+     * @param bool $lists
+     * @param bool $add
+     * @param bool $edit
+     * @param bool $delete
      */
-    public static function support($name, $traits = [], $middleware = [])
+    public static function support($name,
+                                   $middleware = [],
+                                   $get = false,
+                                   $originLists = false,
+                                   $lists = false,
+                                   $add = false,
+                                   $edit = false,
+                                   $delete = false)
     {
         Route::group([
             'prefix' => $name,
             'middleware' => $middleware
-        ], function () use ($name, $traits) {
-            if (in_array('get', $traits)) Route::post('get', Str::studly($name) . '@get');
-            if (in_array('originLists', $traits)) Route::post('originLists', Str::studly($name) . '@originLists');
-            if (in_array('lists', $traits)) Route::post('lists', Str::studly($name) . '@lists');
-            if (in_array('add', $traits)) Route::post('add', Str::studly($name) . '@add');
-            if (in_array('edit', $traits)) Route::post('edit', Str::studly($name) . '@edit');
-            if (in_array('delete', $traits)) Route::post('delete', Str::studly($name) . '@delete');
+        ], function () use ($name, $get, $originLists, $lists, $add, $edit, $delete) {
+            if ($get) Route::post('get', Str::studly($name) . '@get');
+            if ($originLists) Route::post('originLists', Str::studly($name) . '@originLists');
+            if ($lists) Route::post('lists', Str::studly($name) . '@lists');
+            if ($add) Route::post('add', Str::studly($name) . '@add');
+            if ($edit) Route::post('edit', Str::studly($name) . '@edit');
+            if ($delete) Route::post('delete', Str::studly($name) . '@delete');
         });
     }
 }
