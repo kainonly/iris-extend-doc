@@ -1,11 +1,11 @@
 <?php
 
-namespace lumen\bit\facade;
+namespace laravel\bit\facade;
 
 use Illuminate\Support\Facades\Facade;
 use Ramsey\Uuid\Uuid;
 
-class Tools extends Facade
+class Ext extends Facade
 {
     /**
      * msgpack pack

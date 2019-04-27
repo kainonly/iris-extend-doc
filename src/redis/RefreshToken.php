@@ -1,6 +1,6 @@
 <?php
 
-namespace lumen\bit\redis;
+namespace laravel\bit\redis;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Facade;

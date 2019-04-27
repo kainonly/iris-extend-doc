@@ -1,9 +1,9 @@
 {
-  "name": "kain/lumen-bit",
+  "name": "kain/laravel-bit",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "lumen\\bit\\": "src/"
+      "laravel\\bit\\": "src/"
     }
   },
   "authors": [
@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "laravel/lumen-framework": "5.8.*",
+    "laravel/framework": "5.8.*",
     "lcobucci/jwt": "^3.2",
     "ramsey/uuid": "^3.8",
     "ajaxray/short-code": "^1.1"

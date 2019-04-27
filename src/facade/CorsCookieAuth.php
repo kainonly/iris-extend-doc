@@ -1,15 +1,19 @@
 <?php
 
-namespace lumen\bit\facade;
+namespace laravel\bit\facade;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Facade;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
-use lumen\bit\redis\RefreshToken;
+use laravel\bit\redis\RefreshToken;
 
-class Passport extends Facade
+/**
+ * Class CorsCookieAuth
+ * @package laravel\bit\facade
+ */
+class CorsCookieAuth extends Facade
 {
     /**
      * Set Token
@@ -22,8 +26,8 @@ class Passport extends Facade
     {
         try {
             $config = Config::get('passport');
-            $jti = Tools::uuid();
-            $ack = Tools::random();
+            $jti = Ext::uuid();
+            $ack = Ext::random();
             $token = (new Builder())
                 ->setId($jti)
                 ->setIssuer($config['issuer'])
