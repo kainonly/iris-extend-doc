@@ -21,7 +21,7 @@ class RefreshToken extends Facade
     {
         try {
             $code = Hash::make($ack);
-            return Redis::set(self::$key . $uuid, $code, Config::get('passport.l-ttl'));
+            return Redis::set(self::$key . $uuid, $code, Config::get('auth.cors_cookie_auth.l-ttl'));
         } catch (\Exception $e) {
             return false;
         }

@@ -25,7 +25,7 @@ class CorsCookieAuth extends Facade
     public static function setToken($userId, $roleId, $symbol = [])
     {
         try {
-            $config = Config::get('passport');
+            $config = Config::get('auth.cors_cookie_auth');
             $jti = Ext::uuid();
             $ack = Ext::random();
             $token = (new Builder())
@@ -66,7 +66,7 @@ class CorsCookieAuth extends Facade
     public static function tokenVerify()
     {
         try {
-            $config = Config::get('passport');
+            $config = Config::get('auth.cors_cookie_auth');
             if (!Cookie::get($config['token_name'])) return [
                 'error' => 1,
                 'msg' => 'error:not_exists_token'
@@ -128,7 +128,7 @@ class CorsCookieAuth extends Facade
      */
     public function tokenClear()
     {
-        $config = Config::get('passport');
+        $config = Config::get('auth.cors_cookie_auth');
         Cookie::queue(Cookie::forget($config['token_name']));
     }
 }
