@@ -1,13 +1,12 @@
 <?php
 
-namespace laravel\bit\redis;
+namespace laravel\bit\redisModel;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 
-class RefreshToken extends Facade
+class RefreshToken
 {
     private static $key = 'RefreshToken:';
 
@@ -21,7 +20,7 @@ class RefreshToken extends Facade
     {
         try {
             $code = Hash::make($ack);
-            return Redis::set(self::$key . $uuid, $code, Config::get('auth.cors_cookie_auth.l-ttl'));
+            return Redis::set(self::$key . $uuid, $code, Config::get('auth.cors_cookie_auth.overtime'));
         } catch (\Exception $e) {
             return false;
         }

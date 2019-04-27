@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Facade;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
-use laravel\bit\redis\RefreshToken;
+use laravel\bit\redisModel\RefreshToken;
 
 /**
  * Class CorsCookieAuth
@@ -17,12 +17,13 @@ class CorsCookieAuth extends Facade
 {
     /**
      * Set Token
+     * @param string $label Lable
      * @param string $userId User ID
      * @param string $roleId Role ID
      * @param array $symbol Symbol Tag
      * @return array
      */
-    public static function setToken($userId, $roleId, $symbol = [])
+    public static function setToken($label, $userId, $roleId, $symbol = [])
     {
         try {
             $config = Config::get('auth.cors_cookie_auth');
@@ -30,8 +31,8 @@ class CorsCookieAuth extends Facade
             $ack = Ext::random();
             $token = (new Builder())
                 ->setId($jti)
-                ->setIssuer($config['issuer'])
-                ->setAudience($config['audience'])
+                ->setIssuer($config['label'][$label]['issuer'])
+                ->setAudience($config['label'][$label]['audience'])
                 ->set('ack', $ack)
                 ->set('user', $userId)
                 ->set('role', $roleId)
@@ -43,10 +44,10 @@ class CorsCookieAuth extends Facade
             $result = RefreshToken::factory($jti, $ack);
             if (!$result) return [
                 'error' => 1,
-                'msg' => 'error:factory_refresh_token_failed'
+                'msg' => 'error:factory_failed'
             ];
 
-            Cookie::queue($config['token_name'], (string)$token, 21600, null, null, true, true);
+            Cookie::queue($label, (string)$token);
             return [
                 'error' => 0,
                 'msg' => 'ok'
@@ -61,25 +62,26 @@ class CorsCookieAuth extends Facade
 
     /**
      * Token Verify
+     * @param string $label
      * @return array
      */
-    public static function tokenVerify()
+    public static function tokenVerify($label)
     {
         try {
             $config = Config::get('auth.cors_cookie_auth');
-            if (!Cookie::get($config['token_name'])) return [
+            if (!Cookie::get($label)) return [
                 'error' => 1,
                 'msg' => 'error:not_exists_token'
             ];
 
-            $token = (new Parser())->parse(Cookie::get($config['token_name']));
+            $token = (new Parser())->parse(Cookie::get($label));
             if (!$token->verify($config['sha256'], $config['secret'])) return [
                 'error' => 1,
                 'msg' => 'error:verify'
             ];
 
-            if ($token->getClaim('iss') != $config['issuer'] ||
-                $token->getClaim('aud') != $config['audience']) return [
+            if ($token->getClaim('iss') != $config['label'][$label]['issuer'] ||
+                $token->getClaim('aud') != $config['label'][$label]['audience']) return [
                 'error' => 1,
                 'msg' => 'error:incorrect'
             ];
@@ -97,8 +99,8 @@ class CorsCookieAuth extends Facade
 
                 $newToken = (new Builder())
                     ->setId($token->getClaim('jti'))
-                    ->setIssuer($config['issuer'])
-                    ->setAudience($config['audience'])
+                    ->setIssuer($config['label'][$label]['issuer'])
+                    ->setAudience($config['label'][$label]['audience'])
                     ->set('ack', $token->getClaim('ack'))
                     ->set('user', $token->getClaim('user'))
                     ->set('role', $token->getClaim('role'))
@@ -108,7 +110,7 @@ class CorsCookieAuth extends Facade
                     ->getToken();
 
                 $token = $newToken;
-                Cookie::queue($config['token_name'], (string)$token, 21600, null, null, true, true);
+                Cookie::queue($label, (string)$token);
             }
 
             return [
@@ -124,11 +126,11 @@ class CorsCookieAuth extends Facade
     }
 
     /**
-     * clear token
+     * Clear Token
+     * @param string $label
      */
-    public function tokenClear()
+    public function tokenClear($label)
     {
-        $config = Config::get('auth.cors_cookie_auth');
-        Cookie::queue(Cookie::forget($config['token_name']));
+        Cookie::queue(Cookie::forget($label));
     }
 }
