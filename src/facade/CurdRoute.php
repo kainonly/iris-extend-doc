@@ -2,7 +2,6 @@
 
 namespace laravel\bit\facade;
 
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -10,7 +9,7 @@ use Illuminate\Support\Str;
  * Class CurdRoute
  * @package laravel\bit\facade
  */
-class CurdRoute extends Facade
+final class CurdRoute
 {
     /**
      * Quickly generate CURD routes

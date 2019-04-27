@@ -2,10 +2,9 @@
 
 namespace laravel\bit\facade;
 
-use Illuminate\Support\Facades\Facade;
 use Ramsey\Uuid\Uuid;
 
-class Ext extends Facade
+final class Ext
 {
     /**
      * msgpack pack

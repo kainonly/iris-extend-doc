@@ -13,7 +13,7 @@ use laravel\bit\redisModel\RefreshToken;
  * Class CorsCookieAuth
  * @package laravel\bit\facade
  */
-class CorsCookieAuth extends Facade
+final class CorsCookieAuth extends Facade
 {
     /**
      * Set Token
