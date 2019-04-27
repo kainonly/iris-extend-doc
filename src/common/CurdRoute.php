@@ -1,6 +1,6 @@
 <?php
 
-namespace laravel\bit\facade;
+namespace laravel\bit\common;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;

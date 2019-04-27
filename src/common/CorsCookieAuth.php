@@ -1,6 +1,6 @@
 <?php
 
-namespace laravel\bit\facade;
+namespace laravel\bit\common;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
@@ -129,7 +129,7 @@ final class CorsCookieAuth extends Facade
      * Clear Token
      * @param string $label
      */
-    public function tokenClear($label)
+    public static function tokenClear($label)
     {
         Cookie::queue(Cookie::forget($label));
     }
