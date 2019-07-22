@@ -1,3 +1,9 @@
-## Laravel Bit
+# Laravel Curd
 
-Make the Laravel framework more convenient to expand
+CURD library for Laravel framework
+
+### Setup
+
+```shell
+composer require kain/laravel-curd
+```

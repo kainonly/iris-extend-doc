@@ -1,13 +1,13 @@
 <?php
 
-namespace laravel\bit\curd;
+namespace laravel\curd\common;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 /**
  * Trait AddModel
- * @package laravel\bit\curd
+ * @package laravel\curd\common
  * @property string model
  * @property array post
  * @property array add_validate

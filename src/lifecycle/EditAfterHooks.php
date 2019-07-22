@@ -1,6 +1,6 @@
 <?php
 
-namespace laravel\bit\lifecycle;
+namespace laravel\curd\lifecycle;
 
 interface EditAfterHooks
 {

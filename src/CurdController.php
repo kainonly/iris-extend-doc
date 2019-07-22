@@ -1,11 +1,11 @@
 <?php
 
-namespace laravel\bit;
+namespace laravel\curd;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
-abstract class BitController extends BaseController
+abstract class CurdController extends BaseController
 {
     protected $model;
     protected $post = [];

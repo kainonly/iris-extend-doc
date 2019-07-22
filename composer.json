@@ -1,9 +1,9 @@
 {
-  "name": "kain/laravel-bit",
+  "name": "kain/laravel-curd",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "laravel\\bit\\": "src/"
+      "laravel\\curd\\": "src/"
     }
   },
   "authors": [
@@ -13,8 +13,6 @@
     }
   ],
   "require": {
-    "laravel/framework": "5.8.*",
-    "ramsey/uuid": "^3.8",
-    "ajaxray/short-code": "^1.1"
+    "laravel/framework": "5.8.*"
   }
 }
