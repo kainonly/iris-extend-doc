@@ -1,12 +1,12 @@
 {
-    "name": "kain/laravel-curd",
-    "description": "CURD library for Laravel framework",
+    "name": "kain/lumen-support",
+    "description": "Feature support library for lumen framework",
     "require": {
-        "laravel/framework": "5.8.*"
+        "laravel/lumen-framework": "*"
     },
     "autoload": {
         "psr-4": {
-            "laravel\\curd\\": "src/"
+            "Lumen\\Support\\": "src/"
         }
     },
     "authors": [
