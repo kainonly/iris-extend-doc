@@ -2,6 +2,7 @@
     "name": "kain/lumen-support",
     "description": "Feature support library for lumen framework",
     "require": {
+        "ext-redis": "*",
         "laravel/lumen-framework": "*"
     },
     "autoload": {
