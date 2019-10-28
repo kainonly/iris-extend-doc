@@ -1,9 +1,9 @@
-# Laravel Curd
+# Lumen Support
 
-CURD library for Laravel framework
+Feature support library for lumen framework
 
 ### Setup
 
 ```shell
-composer require kain/laravel-curd
+composer require kain/lumen-support
 ```
