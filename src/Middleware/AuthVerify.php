@@ -5,6 +5,7 @@ namespace Lumen\Support\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Lumen\Extra\Facade\Context;
 use Lumen\Extra\Facade\Token;
 use Lumen\Support\RedisModel\RefreshToken;
 
@@ -59,6 +60,7 @@ abstract class AuthVerify
                         'msg' => 'create token failed'
                     ]);
                 }
+                Context::set('auth', $symbol);
                 Cookie::queue($this->scene . '_token', $preTokenString);
             }
 
