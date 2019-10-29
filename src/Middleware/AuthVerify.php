@@ -33,11 +33,12 @@ abstract class AuthVerify
 
             $tokenString = Cookie::get($this->scene . '_token');
             $result = Token::verify($this->scene, $tokenString);
+            /**
+             * @var $token \Lcobucci\JWT\Token
+             */
+            $token = $result->token;
+            $symbol = $token->getClaim('symbol');
             if ($result->expired) {
-                /**
-                 * @var $token \Lcobucci\JWT\Token
-                 */
-                $token = $result->token;
                 $jti = $token->getClaim('jti');
                 $ack = $token->getClaim('ack');
                 $verify = RefreshToken::create()->verify($jti, $ack);
@@ -47,12 +48,11 @@ abstract class AuthVerify
                         'msg' => 'refresh token verification expired'
                     ], 401);
                 }
-                $symbol = (array)$token->getClaim('symbol');
                 $preTokenString = (string)Token::create(
                     $this->scene,
                     $jti,
                     $ack,
-                    $symbol
+                    (array)$symbol
                 );
                 if (empty($preTokenString)) {
                     return response()->json([
@@ -60,10 +60,9 @@ abstract class AuthVerify
                         'msg' => 'create token failed'
                     ]);
                 }
-                Context::set('auth', $symbol);
                 Cookie::queue($this->scene . '_token', $preTokenString);
             }
-
+            Context::set('auth', $symbol);
             return $next($request);
         } catch (\Exception $e) {
             return response()->json([
