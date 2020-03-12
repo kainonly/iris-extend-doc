@@ -1,3 +1,3 @@
-# Redis Api
+# Redis Client
 
-Manage Redis client using HTTP API
+Cross-platform Redis management tool client
