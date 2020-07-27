@@ -1,0 +1,36 @@
+.main {
+  height: 100%;
+  width: 100%;
+}
+
+.workspace {
+  height: 100%;
+  width: 100%;
+  padding: 12px;
+
+  ::ng-deep .ant-tabs-card .ant-tabs-content {
+    margin-top: -16px;
+  }
+
+  ::ng-deep .ant-tabs-card .ant-tabs-content .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+  }
+
+  ::ng-deep .ant-tabs-card .ant-tabs-bar {
+    border-color: #fff;
+  }
+
+  ::ng-deep .ant-tabs-card .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  ::ng-deep .ant-tabs-card .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+  }
+}
+
+
+

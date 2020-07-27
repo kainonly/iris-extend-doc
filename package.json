@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ng serve",
+    "start:electron": "npm run build:electron && electron ./dist/client.js",
     "build": "ng build --prod",
+    "build:electron": "tsc --build tsconfig.cli.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,6 +34,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "electron": "^9.1.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
