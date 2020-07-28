@@ -18,7 +18,6 @@ export class ElectronService {
   }
 
   constructor() {
-    // Conditional imports
     if (this.isElectron) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.webFrame = window.require('electron').webFrame;

@@ -1,24 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ElectronService } from './common/electron.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <nz-layout class="main">
+      <app-nav></app-nav>
+      <nz-content>
+        <app-workspace></app-workspace>
+      </nz-content>
+    </nz-layout>
+  `,
+  styles: [`
+    .main {
+      height: 100%;
+      width: 100%;
+    }
+  `]
 })
-export class AppComponent implements OnInit {
-  tabs = [1, 2, 3];
-
-  constructor(
-    private electron: ElectronService
-  ) {
-  }
-
-  ngOnInit() {
-  }
-
-  quit() {
-    this.electron.remote.app.quit();
-  }
-
+export class AppComponent {
 }
