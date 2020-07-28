@@ -12,7 +12,7 @@ import {
   NzDividerModule,
   NzIconModule,
   NzLayoutModule,
-  NzMenuModule,
+  NzMenuModule, NzTableModule,
   NzTabsModule
 } from 'ng-zorro-antd';
 
@@ -42,7 +42,8 @@ import { RedisService } from './common/redis.service';
     NzMenuModule,
     NzTabsModule,
     NzCardModule,
-    NzDividerModule
+    NzDividerModule,
+    NzTableModule
   ],
   providers: [
     AppService,

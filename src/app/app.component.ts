@@ -5,17 +5,9 @@ import { Component } from '@angular/core';
   template: `
     <nz-layout class="main">
       <app-nav></app-nav>
-      <nz-content>
-        <app-workspace></app-workspace>
-      </nz-content>
+      <app-workspace></app-workspace>
     </nz-layout>
-  `,
-  styles: [`
-    .main {
-      height: 100%;
-      width: 100%;
-    }
-  `]
+  `
 })
 export class AppComponent {
 }

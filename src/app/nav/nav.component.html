@@ -1,9 +1,16 @@
-<ul class="app-region-drag" nz-menu nzMode="horizontal">
-  <li class="app-region-no-drag" nz-submenu nzTitle="Redis 客户端" nzIcon="dashboard">
+<ul class="nav" nz-menu nzMode="horizontal">
+  <li nz-submenu nzTitle="实例管理" nzIcon="cluster">
     <ul>
       <li nz-menu-item>
         <i nz-icon nzType="api"></i>
-        <span>创建连接</span>
+        <span>创建实例</span>
+      </li>
+      <li nz-submenu nzTitle="连接实例" nzIcon="deployment-unit">
+        <ul>
+          <li nz-menu-item>阿里云缓存</li>
+          <li nz-menu-item>腾讯云缓存</li>
+          <li nz-menu-item>华为云缓存</li>
+        </ul>
       </li>
       <li nz-menu-divider></li>
       <li nz-menu-item (click)="quit()">
@@ -12,7 +19,7 @@
       </li>
     </ul>
   </li>
-  <li class="app-region-no-drag" nz-submenu nzTitle="控制台" nzIcon="control" nzDisabled>
+  <li nz-submenu nzTitle="控制台" nzIcon="control" nzDisabled>
     <ul>
       <li nz-menu-item>
         <i nz-icon nzType="fund"></i>
@@ -25,3 +32,4 @@
     </ul>
   </li>
 </ul>
+

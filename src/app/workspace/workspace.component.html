@@ -1,7 +1,40 @@
 <div class="workspace">
   <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
-    <nz-tab *ngFor="let tab of tabs" [nzTitle]="'Tab Title ' + tab">
-
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="workTitleRef">
+      <ng-template #workTitleRef>
+        {{ tab }}
+        <i nz-icon nzType="close" (click)="closeTab(tab)" class="ant-tabs-close-x"></i>
+      </ng-template>
+      <nz-table
+        #basicTable
+        [nzSize]="'middle'"
+        [nzData]="listOfData"
+        [nzBordered]="true"
+        [nzShowSizeChanger]="true"
+      >
+        <thead>
+        <tr>
+          <th><b>键名</b></th>
+          <th><b>键值</b></th>
+          <th><b>操作</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td>
+            <a>
+              <i nz-icon nzType="edit"></i>
+            </a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>
+              <i nz-icon nzType="delete"></i>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
     </nz-tab>
   </nz-tabset>
 </div>

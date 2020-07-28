@@ -4,7 +4,10 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
-    frame: false,
+    minHeight: 600,
+    minWidth: 800,
+    autoHideMenuBar: true,
+    titleBarStyle: 'hiddenInset',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
