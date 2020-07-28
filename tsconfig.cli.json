@@ -12,6 +12,6 @@
     }
   },
   "include": [
-    "client.ts"
+    "main.ts"
   ]
 }

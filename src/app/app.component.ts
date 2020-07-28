@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectronService } from './common/electron.service';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   tabs = [1, 2, 3];
-  db = [];
-  selectedIndex = 0;
+
+  constructor(
+    private electron: ElectronService
+  ) {
+  }
 
   ngOnInit() {
-    for (let i = 0; i < 50; i++) {
-      this.db.push(i);
-    }
+  }
+
+  quit() {
+    this.electron.remote.app.quit();
   }
 
 }

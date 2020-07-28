@@ -10,7 +10,8 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { NzCardModule, NzIconModule, NzLayoutModule, NzMenuModule, NzTabsModule } from 'ng-zorro-antd';
+import { NzCardModule, NzDividerModule, NzIconModule, NzLayoutModule, NzMenuModule, NzTabsModule } from 'ng-zorro-antd';
+import { ElectronService } from './common/electron.service';
 
 registerLocaleData(zh);
 
@@ -28,9 +29,13 @@ registerLocaleData(zh);
     NzLayoutModule,
     NzMenuModule,
     NzTabsModule,
-    NzCardModule
+    NzCardModule,
+    NzDividerModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    ElectronService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

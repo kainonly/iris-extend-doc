@@ -1,3 +1,11 @@
+.app-region-drag {
+  -webkit-app-region: drag;
+}
+
+.app-region-no-drag {
+  -webkit-app-region: no-drag;
+}
+
 .main {
   height: 100%;
   width: 100%;
@@ -6,7 +14,7 @@
 .workspace {
   height: 100%;
   width: 100%;
-  padding: 12px;
+  padding: 8px;
 
   ::ng-deep .ant-tabs-card .ant-tabs-content {
     margin-top: -16px;
