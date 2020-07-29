@@ -9,11 +9,13 @@ import { zh_CN } from 'ng-zorro-antd/i18n';
 import zh from '@angular/common/locales/zh';
 import {
   NzCardModule,
-  NzDividerModule,
+  NzDividerModule, NzDropDownModule,
   NzIconModule,
   NzLayoutModule,
-  NzMenuModule, NzTableModule,
-  NzTabsModule
+  NzMenuModule,
+  NzTableModule,
+  NzTabsModule,
+  NzTagModule
 } from 'ng-zorro-antd';
 
 registerLocaleData(zh);
@@ -43,7 +45,9 @@ import { RedisService } from './common/redis.service';
     NzTabsModule,
     NzCardModule,
     NzDividerModule,
-    NzTableModule
+    NzTableModule,
+    NzTagModule,
+    NzDropDownModule
   ],
   providers: [
     AppService,

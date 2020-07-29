@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RedisService } from './common/redis.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,15 @@ import { Component } from '@angular/core';
     </nz-layout>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(
+    private redis: RedisService
+  ) {
+  }
+
+  ngOnInit() {
+    this.redis.create('mine', {
+      host: 'dell'
+    });
+  }
 }

@@ -6,11 +6,27 @@ import * as IORedis from 'ioredis';
   providedIn: 'root'
 })
 export class RedisService {
-  Redis: typeof IORedis;
-
   constructor(
     private electron: ElectronService
   ) {
-    this.Redis = electron.remote.require('ioredis');
+  }
+
+  create(id: string, options: IORedis.RedisOptions): void {
+    this.electron.ipcRenderer.send('redis:create', {
+      id,
+      options
+    });
+  }
+
+  scan(id: string): any {
+    return this.electron.ipcRenderer.sendSync('redis:scan', {
+      id
+    });
+  }
+
+  destory(id: string): void {
+    this.electron.ipcRenderer.send('redis:destory', {
+      id
+    });
   }
 }
