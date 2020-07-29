@@ -65,13 +65,25 @@
   <ng-container *ngIf="menuData">
     <ul nz-menu nzSelectable>
       <li style="color: #333" nz-menu-item nzDisabled>
-        {{menuData.key}}
+        <b>{{menuData.key}}</b>
       </li>
       <li nz-menu-divider></li>
-      <li nz-menu-item>设置有效期</li>
-      <li nz-menu-item>重命名</li>
-      <li nz-menu-item>创建副本</li>
-      <li nz-menu-item>删除</li>
+      <li nz-menu-item>
+        <i nz-icon nzType="field-time"></i>
+        <span>设置有效期</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="edit"></i>
+        <span>重命名</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="copy"></i>
+        <span>创建副本</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="delete"></i>
+        <span>删除</span>
+      </li>
     </ul>
   </ng-container>
 </nz-dropdown-menu>
