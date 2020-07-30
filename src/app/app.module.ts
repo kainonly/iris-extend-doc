@@ -8,11 +8,14 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import zh from '@angular/common/locales/zh';
 import {
+  NzButtonModule,
   NzCardModule,
-  NzDividerModule, NzDropDownModule,
-  NzIconModule,
+  NzDividerModule,
+  NzDropDownModule,
+  NzIconModule, NzInputModule,
   NzLayoutModule,
   NzMenuModule,
+  NzSelectModule,
   NzTableModule,
   NzTabsModule,
   NzTagModule
@@ -27,6 +30,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { AppService } from './common/app.service';
 import { ElectronService } from './common/electron.service';
 import { RedisService } from './common/redis.service';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { RedisService } from './common/redis.service';
     NzDividerModule,
     NzTableModule,
     NzTagModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzSpaceModule,
+    NzButtonModule,
+    NzInputModule,
+    NzSelectModule
   ],
   providers: [
     AppService,

@@ -9,10 +9,14 @@ import { RedisService } from '../common/redis.service';
 })
 export class WorkspaceComponent implements OnInit {
   tabs = ['阿里云缓存', '腾讯云缓存', '华为云缓存'];
+
+  select = 0;
+  db: any[] = [];
+  lists: any[] = [];
   checked = false;
   indeterminate = false;
-  lists: any[] = [];
   menuData: any;
+
 
   constructor(
     private redis: RedisService,
@@ -21,6 +25,9 @@ export class WorkspaceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    for (let i = 0; i < 100; i++) {
+      this.db.push(i);
+    }
     const result = this.redis.scan('mine');
     if (!result.error) {
       this.lists = result.data;

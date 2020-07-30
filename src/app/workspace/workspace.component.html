@@ -5,6 +5,40 @@
         {{ tab }}
         <i nz-icon nzType="close" (click)="closeTab(tab)" class="ant-tabs-close-x"></i>
       </ng-template>
+      <nz-space>
+        <nz-space-item>
+          <nz-select [(ngModel)]="select" style="width: 100px">
+            <ng-container *ngFor="let v of db">
+              <nz-option [nzValue]="v" [nzLabel]="v"></nz-option>
+            </ng-container>
+          </nz-select>
+        </nz-space-item>
+        <nz-space-item>
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" style="width: 240px">
+            <input type="text" nz-input placeholder="请输入键名或匹配参数"/>
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+          </ng-template>
+        </nz-space-item>
+        <nz-space-item>
+          <button nz-button nzType="default">
+            <i nz-icon nzType="sync"></i> 刷新
+          </button>
+        </nz-space-item>
+        <nz-space-item>
+          <button nz-button nzType="default">
+            <i nz-icon nzType="plus"></i> 新增
+          </button>
+        </nz-space-item>
+        <nz-space-item>
+          <button nz-button nzType="danger" [disabled]="true">
+            <i nz-icon nzType="delete"></i> 删除
+          </button>
+        </nz-space-item>
+      </nz-space>
+
+      <nz-divider></nz-divider>
 
       <nz-table
         class="workspace-table"
