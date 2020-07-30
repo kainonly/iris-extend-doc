@@ -18,10 +18,17 @@ export class RedisService {
     });
   }
 
-  scan(id: string, match?: string): any {
+  config(id: string, options: string): any {
+    return this.electron.ipcRenderer.sendSync('redis:config', {
+      id,
+      options
+    });
+  }
+
+  scan(id: string, options?: IORedis.ScanStreamOption): any {
     return this.electron.ipcRenderer.sendSync('redis:scan', {
       id,
-      match
+      options
     });
   }
 

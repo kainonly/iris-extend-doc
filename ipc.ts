@@ -9,6 +9,22 @@ ipcMain.on('redis:create', (event, args) => {
   }
 });
 
+ipcMain.on('redis:config', async (event, args) => {
+  if (!instance.hasOwnProperty(args.id)) {
+    event.returnValue = {
+      error: 1,
+      msg: 'Instance does not exist'
+    };
+    return;
+  }
+  const redis = instance[args.id];
+  const data = await redis.config('GET', args.options);
+  event.returnValue = {
+    error: 0,
+    data
+  };
+});
+
 ipcMain.on('redis:scan', (event, args) => {
   if (!instance.hasOwnProperty(args.id)) {
     event.returnValue = {
@@ -18,9 +34,7 @@ ipcMain.on('redis:scan', (event, args) => {
     return;
   }
   const redis = instance[args.id];
-  const stream = redis.scanStream({
-    match: args.match
-  });
+  const stream = redis.scanStream(args.options);
   const keys: any[] = [];
   stream.once('data', (resultKeys) => {
     for (const key of resultKeys) {
