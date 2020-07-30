@@ -18,9 +18,10 @@ export class RedisService {
     });
   }
 
-  scan(id: string): any {
+  scan(id: string, match?: string): any {
     return this.electron.ipcRenderer.sendSync('redis:scan', {
-      id
+      id,
+      match
     });
   }
 

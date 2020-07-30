@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
+    "target": "esnext",
     "paths": {
       "*": [
         "node_modules/*"
