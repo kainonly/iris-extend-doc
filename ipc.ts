@@ -19,7 +19,7 @@ ipcMain.on('redis:config', async (event, args) => {
   }
   try {
     const redis = instance[args.id];
-    const data = await redis.config('GET', args.options);
+    const data = await redis.config('GET', args.key);
     event.returnValue = {
       error: 0,
       data
@@ -42,7 +42,7 @@ ipcMain.on('redis:select', async (event, args) => {
   }
   try {
     const redis = instance[args.id];
-    const msg = await redis.select(args.options);
+    const msg = await redis.select(args.index);
     event.returnValue = {
       error: 0,
       msg
@@ -96,9 +96,32 @@ ipcMain.on('redis:scan', (event, args) => {
   }
 });
 
-ipcMain.on('redis:destory', ((event, args) => {
+ipcMain.on('redis:delete', async (event, args) => {
+  if (!instance.hasOwnProperty(args.id)) {
+    event.returnValue = {
+      error: 1,
+      msg: 'Instance does not exist'
+    };
+    return;
+  }
+  try {
+    const redis: Redis.Redis = instance[args.id];
+    const data = await redis.del(...args.keys);
+    event.returnValue = {
+      error: 0,
+      data
+    };
+  } catch (e) {
+    event.returnValue = {
+      error: 1,
+      msg: e.message
+    };
+  }
+});
+
+ipcMain.on('redis:destory', (event, args) => {
   if (instance.hasOwnProperty(args.id)) {
     instance[args.id].disconnect();
     delete instance[args.id];
   }
-}));
+});

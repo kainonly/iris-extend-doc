@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from './electron.service';
 import * as IORedis from 'ioredis';
+import { ElectronService } from './electron.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +18,17 @@ export class RedisService {
     });
   }
 
-  config(id: string, options: string): any {
+  config(id: string, key: string): any {
     return this.electron.ipcRenderer.sendSync('redis:config', {
       id,
-      options
+      key
     });
   }
 
-  select(id: string, options: number): any {
+  select(id: string, index: number): any {
     return this.electron.ipcRenderer.sendSync('redis:select', {
       id,
-      options
+      index
     });
   }
 
@@ -36,6 +36,13 @@ export class RedisService {
     return this.electron.ipcRenderer.sendSync('redis:scan', {
       id,
       options
+    });
+  }
+
+  delete(id: string, keys: any[]): any {
+    return this.electron.ipcRenderer.sendSync('redis:delete', {
+      id,
+      keys
     });
   }
 

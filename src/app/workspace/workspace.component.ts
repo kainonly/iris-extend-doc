@@ -59,4 +59,11 @@ export class WorkspaceComponent implements OnInit {
     this.menuData = data;
     this.nzContextMenuService.create($event, menu);
   }
+
+  delete(key: string) {
+    const result = this.redis.delete('mine', [key]);
+    if (!result.error) {
+      this.getLists();
+    }
+  }
 }

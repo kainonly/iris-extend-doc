@@ -127,7 +127,7 @@
         <i nz-icon nzType="copy"></i>
         <span>创建副本</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item (click)="delete(menuData.key)">
         <i nz-icon nzType="delete"></i>
         <span>删除</span>
       </li>
