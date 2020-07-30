@@ -25,6 +25,13 @@ export class RedisService {
     });
   }
 
+  select(id: string, options: number): any {
+    return this.electron.ipcRenderer.sendSync('redis:select', {
+      id,
+      options
+    });
+  }
+
   scan(id: string, options?: IORedis.ScanStreamOption): any {
     return this.electron.ipcRenderer.sendSync('redis:scan', {
       id,

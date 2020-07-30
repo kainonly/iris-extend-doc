@@ -1,9 +1,9 @@
 <div class="workspace">
   <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
-    <nz-tab *ngFor="let tab of tabs" [nzTitle]="workTitleRef">
+    <nz-tab *ngFor="let data of app.instance" [nzTitle]="workTitleRef">
       <ng-template #workTitleRef>
-        {{ tab }}
-        <i nz-icon nzType="close" (click)="closeTab(tab)" class="ant-tabs-close-x"></i>
+        {{ data }}
+        <i nz-icon nzType="disconnect" (click)="app.closeInstance(data)" class="ant-tabs-close-x"></i>
       </ng-template>
       <nz-space>
         <nz-space-item>
@@ -16,6 +16,7 @@
           <nz-select
             nzShowSearch
             [(ngModel)]="select"
+            (ngModelChange)="selectChange($event)"
             style="width: 100px"
           >
             <ng-container *ngFor="let database of databases">

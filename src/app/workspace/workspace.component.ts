@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd';
 import { RedisService } from '../common/redis.service';
+import { AppService } from '../common/app.service';
 
 @Component({
   selector: 'app-workspace',
@@ -8,8 +9,6 @@ import { RedisService } from '../common/redis.service';
   styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent implements OnInit {
-  tabs = ['阿里云缓存', '腾讯云缓存', '华为云缓存'];
-
   select = '0';
   databases: any[] = [];
   matchValue: string;
@@ -19,6 +18,7 @@ export class WorkspaceComponent implements OnInit {
   menuData: any;
 
   constructor(
+    public app: AppService,
     private redis: RedisService,
     private nzContextMenuService: NzContextMenuService
   ) {
@@ -48,13 +48,15 @@ export class WorkspaceComponent implements OnInit {
     }
   }
 
-  closeTab(tab: string): void {
-    this.tabs.splice(this.tabs.indexOf(tab), 1);
+  selectChange(database: string) {
+    const result = this.redis.select('mine', parseInt(database, 0));
+    if (!result.error) {
+      this.getLists();
+    }
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, data: any): void {
     this.menuData = data;
     this.nzContextMenuService.create($event, menu);
   }
-
 }
