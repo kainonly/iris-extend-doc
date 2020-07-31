@@ -96,6 +96,75 @@ ipcMain.on('redis:scan', (event, args) => {
   }
 });
 
+ipcMain.on('redis:rename', async (event, args) => {
+  if (!instance.hasOwnProperty(args.id)) {
+    event.returnValue = {
+      error: 1,
+      msg: 'Instance does not exist'
+    };
+    return;
+  }
+  try {
+    const redis: Redis.Redis = instance[args.id];
+    const data = await redis.renamenx(args.key, args.newKey);
+    event.returnValue = {
+      error: 0,
+      data
+    };
+  } catch (e) {
+    event.returnValue = {
+      error: 1,
+      msg: e.message
+    };
+  }
+});
+
+ipcMain.on('redis:expire', async (event, args) => {
+  if (!instance.hasOwnProperty(args.id)) {
+    event.returnValue = {
+      error: 1,
+      msg: 'Instance does not exist'
+    };
+    return;
+  }
+  try {
+    const redis: Redis.Redis = instance[args.id];
+    const data = await redis.expire(args.key, args.second);
+    event.returnValue = {
+      error: 0,
+      data
+    };
+  } catch (e) {
+    event.returnValue = {
+      error: 1,
+      msg: e.message
+    };
+  }
+});
+
+ipcMain.on('redis:ttl', async (event, args) => {
+  if (!instance.hasOwnProperty(args.id)) {
+    event.returnValue = {
+      error: 1,
+      msg: 'Instance does not exist'
+    };
+    return;
+  }
+  try {
+    const redis: Redis.Redis = instance[args.id];
+    const data = await redis.ttl(args.key, args.second);
+    event.returnValue = {
+      error: 0,
+      data
+    };
+  } catch (e) {
+    event.returnValue = {
+      error: 1,
+      msg: e.message
+    };
+  }
+});
+
 ipcMain.on('redis:delete', async (event, args) => {
   if (!instance.hasOwnProperty(args.id)) {
     event.returnValue = {

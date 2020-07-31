@@ -29,7 +29,23 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Electron'],
+    browsers: ['CustomElectron'],
+    customLaunchers: {
+      CustomElectron: {
+        base: 'Electron',
+        flags: [
+          '--remote-debugging-port=9222'
+        ],
+        browserWindowOptions: {
+          webPreferences: {
+            nodeIntegration: true,
+            nodeIntegrationInSubFrames: true,
+            allowRunningInsecureContent: true
+          }
+        },
+        require: __dirname + '/dist/ipc.js'
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });
