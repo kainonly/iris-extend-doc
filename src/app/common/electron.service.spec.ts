@@ -6,11 +6,21 @@ describe('ElectronService', () => {
   let service: ElectronService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ElectronService);
+    if (!service) {
+      TestBed.configureTestingModule({
+        providers: [
+          ElectronService
+        ]
+      });
+      service = TestBed.inject(ElectronService);
+    }
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('is electron', () => {
+    expect(service.isElectron).toBeTruthy();
+  });
+
+  it('test remote', () => {
+    expect(service.remote.app).not.toBeNull();
   });
 });

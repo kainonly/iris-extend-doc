@@ -39,6 +39,29 @@ export class RedisService {
     });
   }
 
+  rename(id: string, key: string, newKey: string): any {
+    return this.electron.ipcRenderer.sendSync('redis:rename', {
+      id,
+      key,
+      newKey
+    });
+  }
+
+  expire(id: string, key: string, second: number): any {
+    return this.electron.ipcRenderer.sendSync('redis:expire', {
+      id,
+      key,
+      second
+    });
+  }
+
+  ttl(id: string, key: string): any {
+    return this.electron.ipcRenderer.sendSync('redis:ttl', {
+      id,
+      key
+    });
+  }
+
   delete(id: string, keys: any[]): any {
     return this.electron.ipcRenderer.sendSync('redis:delete', {
       id,
