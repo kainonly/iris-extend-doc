@@ -15,6 +15,7 @@ import {
   NzIconModule, NzInputModule,
   NzLayoutModule,
   NzMenuModule,
+  NzModalModule,
   NzSelectModule,
   NzTableModule,
   NzTabsModule,
@@ -55,7 +56,8 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NzSpaceModule,
     NzButtonModule,
     NzInputModule,
-    NzSelectModule
+    NzSelectModule,
+    NzModalModule
   ],
   providers: [
     AppService,

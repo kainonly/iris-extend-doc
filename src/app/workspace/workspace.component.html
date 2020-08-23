@@ -109,17 +109,17 @@
 </div>
 
 <nz-dropdown-menu #menu>
-  <ng-container *ngIf="menuData">
+  <ng-container *ngIf="activeValue">
     <ul nz-menu nzSelectable>
       <li style="color: #333" nz-menu-item nzDisabled>
-        <b>{{menuData.key}}</b>
+        <b>{{activeValue.key}}</b>
       </li>
       <li nz-menu-divider></li>
       <li nz-menu-item>
         <i nz-icon nzType="field-time"></i>
         <span>设置有效期</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item (click)="renameOpen()">
         <i nz-icon nzType="edit"></i>
         <span>重命名</span>
       </li>
@@ -127,7 +127,7 @@
         <i nz-icon nzType="copy"></i>
         <span>创建副本</span>
       </li>
-      <li nz-menu-item (click)="delete(menuData.key)">
+      <li nz-menu-item (click)="delete()">
         <i nz-icon nzType="delete"></i>
         <span>删除</span>
       </li>
@@ -135,3 +135,20 @@
   </ng-container>
 </nz-dropdown-menu>
 
+<nz-modal
+  [nzTitle]="renameTitle"
+  [(nzVisible)]="renameVisible"
+  (nzOnCancel)="renameClose()"
+  (nzOnOk)="renameSubmit()"
+>
+  <ng-template #renameTitle>
+    <ng-container *ngIf="activeValue">
+      {{activeValue.key}}
+    </ng-container>
+  </ng-template>
+  <input
+    nz-input
+    placeholder="请填写需要设置的重命名"
+    [(ngModel)]="renameValue"
+  />
+</nz-modal>

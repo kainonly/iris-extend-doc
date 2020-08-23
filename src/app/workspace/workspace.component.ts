@@ -15,7 +15,10 @@ export class WorkspaceComponent implements OnInit {
   lists: any[] = [];
   checked = false;
   indeterminate = false;
-  menuData: any;
+  activeValue: any;
+
+  renameVisible = false;
+  renameValue = '';
 
   constructor(
     public app: AppService,
@@ -56,12 +59,27 @@ export class WorkspaceComponent implements OnInit {
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, data: any): void {
-    this.menuData = data;
+    this.activeValue = data;
     this.nzContextMenuService.create($event, menu);
   }
 
-  delete(key: string) {
-    const result = this.redis.delete('mine', [key]);
+  renameOpen() {
+    this.renameVisible = true;
+    this.renameValue = '';
+  }
+
+  renameClose() {
+    this.renameVisible = false;
+    this.renameValue = '';
+  }
+
+  renameSubmit() {
+    this.renameVisible = false;
+    this.renameValue = '';
+  }
+
+  delete() {
+    const result = this.redis.delete('mine', [this.activeValue.key]);
     if (!result.error) {
       this.getLists();
     }
