@@ -3,6 +3,7 @@ declare (strict_types=1);
 
 namespace think\qcloud\extra;
 
+use Carbon\Carbon;
 use Exception;
 use Overtrue\CosClient\ObjectClient;
 use think\facade\Request;
@@ -61,5 +62,41 @@ class CosFactory
             file_get_contents($file->getRealPath())
         );
         return $fileName;
+    }
+
+    /**
+     * 生成客户端上传 COS 对象存储签名
+     * @param array $conditions 表单域的合法值
+     * @param int $expired 过期时间
+     * @return array
+     * @throws Exception
+     */
+    public function generatePostPresigned(array $conditions, int $expired = 600): array
+    {
+        $date = Carbon::now()->setTimezone('UTC');
+        $keyTime = $date->unix() . ';' . ($date->unix() + $expired);
+        $policy = json_encode([
+            'expiration' => $date->addSeconds($expired)->toISOString(),
+            'conditions' => [
+                ['q-sign-algorithm' => 'sha1'],
+                ['q-ak' => $this->option['secret_id']],
+                ['q-sign-time' => $keyTime],
+                ...$conditions
+            ]
+        ]);
+        $signKey = hash_hmac('sha1', $keyTime, $this->option['secret_key']);
+        $stringToSign = sha1($policy);
+        $signature = hash_hmac('sha1', $stringToSign, $signKey);
+        return [
+            'filename' => date('Ymd') . '/' . uuid()->toString(),
+            'type' => 'cos',
+            'option' => [
+                'ak' => $this->option['secret_id'],
+                'policy' => base64_encode($policy),
+                'key_time' => $keyTime,
+                'sign_algorithm' => 'sha1',
+                'signature' => $signature
+            ],
+        ];
     }
 }
