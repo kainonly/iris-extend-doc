@@ -1,7 +1,7 @@
 <?php
 declare (strict_types=1);
 
-namespace think\qcloud\extra\common;
+namespace think\qcloud\extra;
 
 use Exception;
 use Overtrue\CosClient\ObjectClient;

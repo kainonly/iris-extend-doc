@@ -1,9 +1,8 @@
 <?php
 declare (strict_types=1);
 
-namespace think\qcloud\extra\service;
+namespace think\qcloud\extra;
 
-use think\qcloud\extra\common\CosFactory;
 use think\Service;
 
 class CosService extends Service
