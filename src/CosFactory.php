@@ -8,11 +8,6 @@ use Exception;
 use Overtrue\CosClient\ObjectClient;
 use think\facade\Request;
 
-/**
- * 对象存储处理类
- * Class CosFactory
- * @package think\qcloud\extra\common
- */
 class CosFactory
 {
     /**
@@ -65,6 +60,28 @@ class CosFactory
     }
 
     /**
+     * 删除对象
+     * @param array $keys 对象名
+     * @throws Exception
+     */
+    public function delete(array $keys): void
+    {
+        $object = new ObjectClient([
+            'app_id' => $this->option['app_id'],
+            'secret_id' => $this->option['secret_id'],
+            'secret_key' => $this->option['secret_key'],
+            'bucket' => $this->option['cos']['bucket'],
+            'region' => $this->option['cos']['region'],
+        ]);
+        $object->deleteObjects([
+            'Delete' => [
+                'Quiet' => true,
+                'Object' => [...array_map(static fn($v) => ['Key' => $v], $keys)]
+            ]
+        ]);
+    }
+
+    /**
      * 生成客户端上传 COS 对象存储签名
      * @param array $conditions 表单域的合法值
      * @param int $expired 过期时间
@@ -75,9 +92,12 @@ class CosFactory
     {
         $date = Carbon::now()->setTimezone('UTC');
         $keyTime = $date->unix() . ';' . ($date->unix() + $expired);
+        $filename = date('Ymd') . '/' . uuid()->toString();
         $policy = json_encode([
             'expiration' => $date->addSeconds($expired)->toISOString(),
             'conditions' => [
+                ['bucket' => $this->option['cos']['bucket'] . '-' . $this->option['app_id']],
+                ['starts-with', '$key', $filename],
                 ['q-sign-algorithm' => 'sha1'],
                 ['q-ak' => $this->option['secret_id']],
                 ['q-sign-time' => $keyTime],
@@ -88,7 +108,7 @@ class CosFactory
         $stringToSign = sha1($policy);
         $signature = hash_hmac('sha1', $stringToSign, $signKey);
         return [
-            'filename' => date('Ymd') . '/' . uuid()->toString(),
+            'filename' => $filename,
             'type' => 'cos',
             'option' => [
                 'ak' => $this->option['secret_id'],
