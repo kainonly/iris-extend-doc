@@ -10,8 +10,7 @@ class CosService extends Service
     public function register(): void
     {
         $this->app->bind('cos', function () {
-            $config = $this->app->config
-                ->get('qcloud');
+            $config = $this->app->config->get('qcloud');
             return new CosFactory($config);
         });
     }
