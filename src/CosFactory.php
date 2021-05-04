@@ -8,7 +8,7 @@ use Exception;
 use Overtrue\CosClient\ObjectClient;
 use think\facade\Request;
 
-class CosFactory
+class CosFactory implements CosInterface
 {
     /**
      * 腾讯云配置
@@ -26,7 +26,8 @@ class CosFactory
     }
 
     /**
-     * 获取对象存储配置
+     * @return array
+     * @inheritDoc
      */
     public function getOption(): array
     {
@@ -34,17 +35,15 @@ class CosFactory
     }
 
     /**
-     * 上传至对象存储
-     * @param string $name 文件名称
+     * @param string $name
      * @return string
      * @throws Exception
+     * @inheritDoc
      */
     public function put(string $name): string
     {
         $file = Request::file($name);
-        $fileName = date('Ymd') . '/' .
-            uuid()->toString() . '.' .
-            $file->getOriginalExtension();
+        $fileName = date('Ymd') . '/' . uuid()->toString() . '.' . $file->getOriginalExtension();
         $object = new ObjectClient([
             'app_id' => $this->option['app_id'],
             'secret_id' => $this->option['secret_id'],
@@ -52,17 +51,14 @@ class CosFactory
             'bucket' => $this->option['cos']['bucket'],
             'region' => $this->option['cos']['region'],
         ]);
-        $object->putObject(
-            $fileName,
-            file_get_contents($file->getRealPath())
-        );
+        $object->putObject($fileName, file_get_contents($file->getRealPath()));
         return $fileName;
     }
 
     /**
-     * 删除对象
-     * @param array $keys 对象名
+     * @param array $keys
      * @throws Exception
+     * @inheritDoc
      */
     public function delete(array $keys): void
     {
@@ -82,11 +78,11 @@ class CosFactory
     }
 
     /**
-     * 生成客户端上传 COS 对象存储签名
-     * @param array $conditions 表单域的合法值
-     * @param int $expired 过期时间
+     * @param array $conditions
+     * @param int $expired
      * @return array
      * @throws Exception
+     * @inheritDoc
      */
     public function generatePostPresigned(array $conditions, int $expired = 600): array
     {
